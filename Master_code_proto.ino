@@ -1,9 +1,9 @@
-#define ledPin 8
+
 #define IN1 5
 #define IN2 4
 #define IN3 3
 #define IN4 2
-#define Servopin 6
+#define Magnet 6
 #include <Servo.h>                           // Include servo library
  
 Servo servoLeft;                             // Declare left servo signal
@@ -12,15 +12,13 @@ char state = 0;
 bool Toggle = false;
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
   servoLeft.attach(13);                      // Attach left signal to pin 13
   servoRight.attach(12);
-  digitalWrite(ledPin, LOW);
   pinMode(IN1,OUTPUT);            //Set the LED on Digital 12 as an OUTPUT
   pinMode(IN2, OUTPUT); 
   pinMode(IN3, OUTPUT); 
   pinMode(IN4, OUTPUT); 
-  pinMode(Servopin, OUTPUT);
+  pinMode(Magnet, OUTPUT);
   Serial.begin(38400); // Default communication rate of the Bluetooth module
   
   
@@ -35,7 +33,6 @@ void loop() {
 
   
   if(state =='0'){
-   // digitalWrite(ledPin, LOW); // LED ON
     servoLeft.writeMicroseconds(1500);         // stop
     servoRight.writeMicroseconds(1500);
     state = 0;
@@ -46,12 +43,12 @@ void loop() {
       digitalWrite(IN1, HIGH);
       digitalWrite(IN2, LOW);
       Toggle = true ; 
-      digitalWrite(Servopin, HIGH)  ;        
+      digitalWrite(Magnet, HIGH)  ;        
       }
     else if (Toggle == true){
       digitalWrite(IN1, LOW);
       digitalWrite(IN2, HIGH);
-      digitalWrite(Servopin, LOW);
+      digitalWrite(Magnet, LOW);
       Toggle = false;
     }
     //digitalWrite(ledPin, HIGH); // LED ON
